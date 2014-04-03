@@ -29,6 +29,15 @@ exports.i18n_csv = {
 
     test.done();
   },
+  missing_simple: function (test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/missing_simple/fr.json');
+    var expected = grunt.file.read('test/expected/missing_simple/fr.json');
+    test.equal(actual, expected, 'should use the default language string for missing translations');
+
+    test.done();
+  },
   override_offset: function (test) {
     test.expect(Object.keys(languages).length);
 
@@ -50,6 +59,15 @@ exports.i18n_csv = {
       var expected = grunt.file.read('test/expected/template/' + file);
       test.equal(actual, expected, 'should create an ' + languages[lang] + ' JSON file using the template and replacing the values between @@.');
     }
+
+    test.done();
+  },
+  missing_template: function (test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/missing_template/fr.json');
+    var expected = grunt.file.read('test/expected/missing_template/fr.json');
+    test.equal(actual, expected, 'should use the default language string for missing translations when using a template');
 
     test.done();
   }

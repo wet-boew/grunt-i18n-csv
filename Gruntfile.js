@@ -33,22 +33,36 @@ module.exports = function (grunt) {
 
     // Configuration to be run (and then tested).
     i18n_csv: {
-      default_options: {
-        options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
+      options: {
+        csv: 'test/fixtures/i18n.csv'
       },
-      custom_options: {
+      json: {
         options: {
-          separator: ': ',
-          punctuation: ' !!!'
+          format: 'json'
         },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      }
+        dest: 'tmp/json'
+      },
+      yaml: {
+        options: {
+          format: 'yaml'
+        },
+        dest: 'tmp/yaml'
+      },
+      override_offsets: {
+        options: {
+          csv: 'test/fixtures/i18n_offset.csv',
+          startRow: 1,
+          startCol: 1,
+          format: 'json'
+        },
+        dest: 'tmp/override_offsets'
+      },
+      template: {
+        options: {
+          template: 'test/fixture/template.json'
+        },
+        dest: 'tmp/template'
+      },
     },
 
     // Unit tests.

@@ -2,46 +2,54 @@
 
 var grunt = require('grunt');
 
-/*
-  ======== A Handy Little Nodeunit Reference ========
-  https://github.com/caolan/nodeunit
-
-  Test methods:
-    test.expect(numAssertions)
-    test.done()
-  Test assertions:
-    test.ok(value, [message])
-    test.equal(actual, expected, [message])
-    test.notEqual(actual, expected, [message])
-    test.deepEqual(actual, expected, [message])
-    test.notDeepEqual(actual, expected, [message])
-    test.strictEqual(actual, expected, [message])
-    test.notStrictEqual(actual, expected, [message])
-    test.throws(block, [error], [message])
-    test.doesNotThrow(block, [error], [message])
-    test.ifError(value)
-*/
-
+var supportFormats = {
+  "yml": "YAML",
+  "json": "JSON"
+},
+languages = {
+  en: "English",
+  fr: "French"
+};
 exports.i18n_csv = {
   setUp: function (done) {
     // setup here if necessary
     done();
   },
-  default_options: function (test) {
-    test.expect(1);
+  formats: function (test) {
+    test.expect(Object.keys(languages).length * Object.keys(supportFormats).length);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    for (var format in supportFormats) {
+      for (var lang in languages) {
+        var file = lang + '.' + format;
+        var actual = grunt.file.read('tmp/json/' + file);
+        var expected = grunt.file.read('test/expected/json/' + file);
+        test.equal(actual, expected, 'should create an ' + languages[lang] + ' ' + supportFormats[format] + ' file with all i18n strings.');
+      }
+    }
 
     test.done();
   },
-  custom_options: function (test) {
-    test.expect(1);
+  override_offset: function (test) {
+    test.expect(Object.keys(languages).length);
 
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+    for (var lang in languages) {
+      var file = lang + '.json';
+      var actual = grunt.file.read('tmp/override_offset/' + file);
+      var expected = grunt.file.read('test/expected/override_offset/' + file);
+      test.equal(actual, expected, 'should use the overriden csv file and create an ' + languages[lang] + ' JSON file with all i18n strings, starting at the secopnd row and second column.');
+    }
+
+    test.done();
+  },
+  template: function (test) {
+    test.expect(Object.keys(languages).length);
+
+    for (var lang in languages) {
+      var file = lang + '.json';
+      var actual = grunt.file.read('tmp/template/' + file);
+      var expected = grunt.file.read('test/expected/template/' + file);
+      test.equal(actual, expected, 'should create an ' + languages[lang] + ' JSON file using the template and replacing the values between @@.');
+    }
 
     test.done();
   }

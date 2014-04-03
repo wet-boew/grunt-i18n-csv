@@ -1,5 +1,8 @@
 # grunt-i18n-csv
 
+[![Build Status](https://travis-ci.org/wet-boew/grunt-i18n-csv.svg)](https://travis-ci.org/wet-boew/grunt-i18n-csv)
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 > Create internationalized files from a CSV translations file
 
 ## Getting Started

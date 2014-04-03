@@ -3,16 +3,25 @@
   "version": "0.0.1",
   "description": "Create internationalized files from a CSV translations file",
   "homepage": "https://github.com/wet-boew/grunt-i18n-csv",
-  "repository": "https://github.com/wet-boew/grunt-i18n-csv.git",
   "author": {
     "name": "Laurent Goderre",
     "email": "laurent.goderre@gmail.com",
     "url": "https://github.com/LaurentGoderre"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "grunt",
+    "i18n",
+    "csv",
+    "translation"
   ],
-  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wet-boew/grunt-i18n-csv.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wet-boew/grunt-i18n-csv/issues"
+  },
   "engines": {
     "node": ">=0.10.0"
   },
@@ -21,8 +30,10 @@
       "type": "MIT"
     }
   ],
+  "dependencies": {
+    "csv": "~0.3.6"
+  },
   "devDependencies": {
-    "csv": "~0.3.6",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-contrib-nodeunit": "~0.3.0",

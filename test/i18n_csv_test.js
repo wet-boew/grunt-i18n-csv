@@ -3,8 +3,8 @@
 var grunt = require('grunt');
 
 var supportFormats = {
-  "yml": "YAML",
-  "json": "JSON"
+  "yaml": "yml",
+  "json": "json"
 },
 languages = {
   en: "English",
@@ -20,10 +20,10 @@ exports.i18n_csv = {
 
     for (var format in supportFormats) {
       for (var lang in languages) {
-        var file = lang + '.' + format;
-        var actual = grunt.file.read('tmp/json/' + file);
-        var expected = grunt.file.read('test/expected/json/' + file);
-        test.equal(actual, expected, 'should create an ' + languages[lang] + ' ' + supportFormats[format] + ' file with all i18n strings.');
+        var file = format + '/' + lang + '.' + supportFormats[format];
+        var actual = grunt.file.read('tmp/' + file);
+        var expected = grunt.file.read('test/expected/' + file);
+        test.equal(actual, expected, 'should create an ' + languages[lang] + ' ' + format.toUpperCase() + ' file with all i18n strings.');
       }
     }
 
@@ -34,8 +34,8 @@ exports.i18n_csv = {
 
     for (var lang in languages) {
       var file = lang + '.json';
-      var actual = grunt.file.read('tmp/override_offset/' + file);
-      var expected = grunt.file.read('test/expected/override_offset/' + file);
+      var actual = grunt.file.read('tmp/override_offsets/' + file);
+      var expected = grunt.file.read('test/expected/override_offsets/' + file);
       test.equal(actual, expected, 'should use the overriden csv file and create an ' + languages[lang] + ' JSON file with all i18n strings, starting at the secopnd row and second column.');
     }
 

@@ -37,9 +37,6 @@ module.exports = function (grunt) {
         csv: 'test/fixtures/i18n.csv'
       },
       json: {
-        options: {
-          format: 'json'
-        },
         dest: 'tmp/json'
       },
       yaml: {
@@ -48,9 +45,16 @@ module.exports = function (grunt) {
         },
         dest: 'tmp/yaml'
       },
+      missing_simple: {
+        options: {
+          csv: 'test/fixtures/i18n_missing.csv',
+          useDefaultOnMissing: true
+        },
+        dest: 'tmp/missing_simple'
+      },
       override_offsets: {
         options: {
-          csv: 'test/fixtures/i18n_offset.csv',
+          csv: 'test/fixtures/i18n_offest.csv',
           startRow: 1,
           startCol: 1,
           format: 'json'
@@ -59,9 +63,17 @@ module.exports = function (grunt) {
       },
       template: {
         options: {
-          template: 'test/fixture/template.json'
+          template: 'test/fixtures/template.json'
         },
         dest: 'tmp/template'
+      },
+      missing_template: {
+        options: {
+          csv: 'test/fixtures/i18n_missing.csv',
+          template: 'test/fixtures/template.json',
+          useDefaultOnMissing: true
+        },
+        dest: 'tmp/missing_template'
       },
     },
 

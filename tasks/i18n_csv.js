@@ -30,7 +30,8 @@ module.exports = function (grunt) {
       startRow: 0,
       startCol: 0,
       format: 'json',
-      useDefaultOnMissing : false
+      useDefaultOnMissing : false,
+      headerRowHasKey: false
     });
 
     var languages, processor;
@@ -65,8 +66,9 @@ module.exports = function (grunt) {
           var newRow = row.splice(options.startCol);
 
           if (index === options.startRow) {
-            languages = newRow.splice(1);
-          } else if (index > options.startRow) {
+            languages = newRow.slice(1);
+          }
+          if (index > options.startRow || (index === options.startRow && options.headerRowHasKey)) {
             processor.process(newRow);
           }
         }

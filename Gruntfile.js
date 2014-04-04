@@ -52,6 +52,13 @@ module.exports = function (grunt) {
         },
         dest: 'tmp/missing_simple'
       },
+      header_has_key: {
+        options: {
+          csv: 'test/fixtures/i18n_header_has_key.csv',
+          headerRowHasKey: true
+        },
+        dest: 'tmp/header_has_key'
+      },
       override_offsets: {
         options: {
           csv: 'test/fixtures/i18n_offest.csv',

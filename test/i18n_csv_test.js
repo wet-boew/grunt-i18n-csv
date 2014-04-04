@@ -38,6 +38,15 @@ exports.i18n_csv = {
 
     test.done();
   },
+  header_has_key: function (test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/header_has_key/en.json');
+    var expected = grunt.file.read('test/expected/header_has_key/en.json');
+    test.equal(actual, expected, 'should use the first row for headers and values');
+
+    test.done();
+  },
   override_offset: function (test) {
     test.expect(Object.keys(languages).length);
 

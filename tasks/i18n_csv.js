@@ -33,7 +33,7 @@ module.exports = function (grunt) {
       useDefaultOnMissing : false
     });
 
-    var languages, extention, processor;
+    var languages, processor;
 
     if (options.csv === undefined) {
       grunt.fail.warn('Missing required options \'csv\'');
@@ -41,16 +41,15 @@ module.exports = function (grunt) {
 
     if (options.template !== undefined) {
       options.templateContent = grunt.file.read(options.template);
+      options.ext = path.extname(options.template);
       processor = template(options);
-      extention = path.extname(options.template);
     } else {
+      if (options.format === 'json') {
+        options.ext = ".json";
+      } else if (options.format === 'yaml') {
+        options.ext = ".yml";
+      }
       processor = simple(options);
-    }
-
-    if (options.format === 'json') {
-      extention = ".json";
-    } else if (options.format === 'yaml') {
-      extention = ".yml";
     }
 
     csv().from.stream(
@@ -75,7 +74,7 @@ module.exports = function (grunt) {
       'end', function () {
         var contents = processor.complete();
         contents.forEach(function(content, index){
-          var file = path.join(task.files[0].dest, languages[index] + extention);
+          var file = path.join(task.files[0].dest, languages[index] + options.ext);
           grunt.file.write(file, content);
           grunt.log.writeln('File "' + file + '" created.');
         });

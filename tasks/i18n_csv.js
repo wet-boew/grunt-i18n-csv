@@ -11,6 +11,7 @@
 var fs = require('fs');
 var path = require('path');
 var csv = require('csv');
+var chalk = require('chalk');
 var simple = require('../lib/simple');
 var template = require('../lib/template');
 
@@ -78,7 +79,7 @@ module.exports = function (grunt) {
         contents.forEach(function(content, index){
           var file = path.join(task.files[0].dest, languages[index] + options.ext);
           grunt.file.write(file, content);
-          grunt.log.writeln('File "' + file + '" created.');
+          grunt.log.writeln('File ' + chalk.cyan(file) + ' created.');
         });
         done();
       }

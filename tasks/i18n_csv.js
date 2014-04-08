@@ -81,6 +81,9 @@ module.exports = function (grunt) {
           grunt.file.write(file, content);
           grunt.log.writeln('File ' + chalk.cyan(file) + ' created.');
         });
+
+        grunt.config([task.name, task.target, 'locales'], languages);
+
         done();
       }
     );

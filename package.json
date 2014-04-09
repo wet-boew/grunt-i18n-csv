@@ -1,6 +1,6 @@
 {
   "name": "grunt-i18n-csv",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Create internationalized files from a CSV translations file",
   "homepage": "https://github.com/wet-boew/grunt-i18n-csv",
   "author": {
@@ -39,6 +39,7 @@
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-contrib-nodeunit": "~0.3.0",
     "grunt": "~0.4.1",
+    "grunt-file-creator": "~0.1.1",
     "jshint-stylish": "~0.1.5",
     "load-grunt-tasks": "~0.3.0"
   },

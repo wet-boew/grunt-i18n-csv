@@ -34,7 +34,7 @@ exports.i18n_csv = {
 
     var actual = grunt.file.read('tmp/missing_simple/fr.json');
     var expected = grunt.file.read('test/expected/missing_simple/fr.json');
-    test.equal(actual, expected, 'should use the default language string for missing translations');
+    test.equal(actual, expected, 'should use the default language string for missing translations.');
 
     test.done();
   },
@@ -43,7 +43,7 @@ exports.i18n_csv = {
 
     var actual = grunt.file.read('tmp/header_has_key/en.json');
     var expected = grunt.file.read('test/expected/header_has_key/en.json');
-    test.equal(actual, expected, 'should use the first row for headers and values');
+    test.equal(actual, expected, 'should use the first row for headers and values.');
 
     test.done();
   },
@@ -76,7 +76,25 @@ exports.i18n_csv = {
 
     var actual = grunt.file.read('tmp/missing_template/fr.json');
     var expected = grunt.file.read('test/expected/missing_template/fr.json');
-    test.equal(actual, expected, 'should use the default language string for missing translations when using a template');
+    test.equal(actual, expected, 'should use the default language string for missing translations when using a template.');
+
+    test.done();
+  },
+  locales_output: function (test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/json/locales.txt');
+    var expected = 'en,fr';
+    test.equal(actual, expected, 'should output a list of generated languages.');
+
+    test.done();
+  },
+  list_only: function (test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/locales.txt');
+    var expected = 'en,fr';
+    test.equal(actual, expected, 'should only output a list of generated languages.');
 
     test.done();
   }

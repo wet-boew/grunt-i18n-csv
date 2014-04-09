@@ -88,5 +88,14 @@ exports.i18n_csv = {
     test.equal(actual, expected, 'should output a list of generated languages.');
 
     test.done();
+  },
+  list_only: function (test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/locales.txt');
+    var expected = 'en,fr';
+    test.equal(actual, expected, 'should only output a list of generated languages.');
+
+    test.done();
   }
 };

@@ -32,7 +32,8 @@ module.exports = function (grunt) {
       startCol: 0,
       format: 'json',
       useDefaultOnMissing : false,
-      headerRowHasKey: false
+      headerRowHasKey: false,
+      listOnly: false
     });
 
     var languages, processor;
@@ -45,7 +46,7 @@ module.exports = function (grunt) {
       options.templateContent = grunt.file.read(options.template);
       options.ext = path.extname(options.template);
       processor = template(options);
-    } else {
+    } else if (!options.listOnly) {
       if (options.format === 'json') {
         options.ext = ".json";
       } else if (options.format === 'yaml') {
@@ -68,6 +69,15 @@ module.exports = function (grunt) {
 
           if (index === options.startRow) {
             languages = newRow.slice(1);
+            grunt.config([task.name, task.target, 'locales'], languages);
+
+            if (options.listOnly) {
+              this.removeAllListeners('record');
+              this.removeAllListeners('end');
+              this.end();
+              return done();
+            }
+
           }
           if (index > options.startRow || (index === options.startRow && options.headerRowHasKey)) {
             processor.process(newRow);
@@ -81,9 +91,6 @@ module.exports = function (grunt) {
           grunt.file.write(file, content);
           grunt.log.writeln('File ' + chalk.cyan(file) + ' created.');
         });
-
-        grunt.config([task.name, task.target, 'locales'], languages);
-
         done();
       }
     );

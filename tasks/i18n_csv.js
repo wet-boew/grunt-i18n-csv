@@ -69,6 +69,8 @@ module.exports = function (grunt) {
 
           if (index === options.startRow) {
             languages = newRow.slice(1);
+
+            // Outputs the list of locales as a grunt variables (<%= i18n_csv.taskname.locales %>)
             grunt.config([task.name, task.target, 'locales'], languages);
 
             if (options.listOnly) {

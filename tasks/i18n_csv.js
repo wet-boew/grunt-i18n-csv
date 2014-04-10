@@ -55,8 +55,9 @@ module.exports = function (grunt) {
       processor = simple(options);
     }
 
+    var stream = fs.createReadStream(options.csv);
     csv().from.stream(
-      fs.createReadStream(options.csv)
+      stream
     ).on(
       'error', 
       function(error) { 
@@ -76,7 +77,7 @@ module.exports = function (grunt) {
             if (options.listOnly) {
               this.removeAllListeners('record');
               this.removeAllListeners('end');
-              this.end();
+              stream.close();
               return done();
             }
 
